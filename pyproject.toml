@@ -7,7 +7,7 @@ version = "0.1.0"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-# snapflow = "^0.3.5"
+snapflow = "^0.3.6"
 
 mailchimp-marketing = "^3.0.36"
 [tool.poetry.dev-dependencies]
@@ -18,7 +18,7 @@ mypy = "^0.770"
 pre-commit = "^2.1.1"
 pytest = "^4.6"
 pytest-cov = "^2.8.1"
-snapflow = {path = "../snapflow", develop = true}
+# snapflow = {path = "../snapflow", develop = true}
 
 [tool.black]
 exclude = '''
