@@ -3,13 +3,13 @@ authors = ["Ken Van Haren <kenvanharen@gmail.com>"]
 description = "Mailchimp module for snapflow"
 license = "BSD-3-Clause"
 name = "snapflow-mailchimp"
-version = "0.1.0"
+version = "0.1.1"
 
 [tool.poetry.dependencies]
-python = "^3.7"
-snapflow = "^0.3.6"
-
 mailchimp-marketing = "^3.0.36"
+python = "^3.7"
+snapflow = "~0.3.6"
+
 [tool.poetry.dev-dependencies]
 black = "^19.10b0"
 flake8 = "^3.8.1"
