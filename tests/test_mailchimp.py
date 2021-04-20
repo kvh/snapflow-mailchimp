@@ -44,7 +44,7 @@ def delete_list(mailchimp: Client, id: str):
 
 
 def test():
-    import snapflow_mailchimp
+    from snapflow_mailchimp import module as snapflow_mailchimp
 
     api_key = ensure_api_key()
     server = api_key.split("-")[-1]  # Hack? appears to be true for new api keys
@@ -86,7 +86,7 @@ def test():
             params={"dataframe": members_df, "schema": "MailchimpMember"},
         )
         export_aud = g.create_node(
-            snapflow_mailchimp.snaps.export_audience,
+            snapflow_mailchimp.functions.export_audience,
             input=import_df,
             params={"api_key": api_key, "list_id": list_id, "server": server},
         )

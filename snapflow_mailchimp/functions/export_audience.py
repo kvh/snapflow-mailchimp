@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 import pandas as pd
-from snapflow import DataBlock, Snap, SnapContext, Param
+from snapflow import DataBlock, Function, FunctionContext
 from loguru import logger
 
 from mailchimp_marketing import Client
@@ -14,22 +14,23 @@ from mailchimp_marketing.api_client import ApiClientError
 if TYPE_CHECKING:
     from snapflow_mailchimp import MailchimpMember
 
-# logger.enable("snapflow")
 
-
-@Snap("export_audience", module="mailchimp", display_name="Export Mailchimp audience")
-@Param("api_key", "str")
-@Param("server", "str")
-@Param("list_id", "str")
-def export_audience(ctx: SnapContext, members: DataBlock[MailchimpMember]):
+@Function(
+    "export_audience", namespace="mailchimp", display_name="Export Mailchimp audience"
+)
+def export_audience(
+    members: DataBlock[MailchimpMember],
+    api_key: str,
+    server: str,
+    list_id: str,
+):
     mailchimp = Client()
     mailchimp.set_config(
         {
-            "api_key": ctx.get_param("api_key"),
-            "server": ctx.get_param("server"),
+            "api_key": api_key,
+            "server": server,
         }
     )
-    list_id = ctx.get_param("list_id")
     member_records = members.as_records()
     for record in member_records:
         member = {
