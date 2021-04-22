@@ -5,7 +5,8 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 import pandas as pd
-from snapflow import DataBlock, Function, FunctionContext
+from snapflow import DataBlock
+from snapflow import datafunction, Context
 from loguru import logger
 
 from mailchimp_marketing import Client
@@ -15,21 +16,15 @@ if TYPE_CHECKING:
     from snapflow_mailchimp import MailchimpMember
 
 
-@Function(
+@datafunction(
     "export_audience", namespace="mailchimp", display_name="Export Mailchimp audience"
 )
 def export_audience(
-    members: DataBlock[MailchimpMember],
-    api_key: str,
-    server: str,
-    list_id: str,
+    members: DataBlock[MailchimpMember], api_key: str, server: str, list_id: str,
 ):
     mailchimp = Client()
     mailchimp.set_config(
-        {
-            "api_key": api_key,
-            "server": server,
-        }
+        {"api_key": api_key, "server": server,}
     )
     member_records = members.as_records()
     for record in member_records:
